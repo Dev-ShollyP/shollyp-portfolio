@@ -1,0 +1,410 @@
+{
+  "name": "Email Classification",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        352
+      ],
+      "id": "fd230503-3367-43fc-a5ed-5dca2ee66785",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const subject = $input.first().json.subject || $input.first().json.Subject || '';\nconst s = subject.toLowerCase();\n\nlet department = 'Other';\n\nif (s.includes('quote') || s.includes('pricing') || s.includes('deal') || s.includes('proposal')) {\n  department = 'Sales';\n} else if (s.includes('support') || s.includes('issue') || s.includes('refund') || s.includes('complaint')) {\n  department = 'Customer Service';\n} else if (s.includes('leave') || s.includes('payroll') || s.includes('hiring') || s.includes('onboarding')) {\n  department = 'HR';\n} else if (s.includes('invoice') || s.includes('payment') || s.includes('budget') || s.includes('expense')) {\n  department = 'Finance';\n} else if (s.includes('delivery') || s.includes('logistics') || s.includes('supply') || s.includes('maintenance')) {\n  department = 'Operations';\n}\n\nreturn [{ json: { ...$input.first().json, department } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        352
+      ],
+      "id": "b17f24c4-e51c-4b63-a760-ecb78d4bcabd",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "Sales",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "14faa248-4f8f-4f4d-bfd5-4f7945422cbf"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sales"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "453e2413-f6e2-4cfc-b564-19b5b6bfeea7",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "Finance",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Finance"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "30ec565d-f13d-4394-9070-0e6b689cfd7c",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "Operations",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Operations"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "830dc926-9bf9-48e7-bbe8-fc0fd3bc8288",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "HR",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "HR"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "49cfd8e2-08a7-41eb-bff8-bf83341e6535",
+                    "leftValue": "={{ $json.department }}",
+                    "rightValue": "Customer Service",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Customer Service"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        288
+      ],
+      "id": "517ce222-6f9a-4d94-a74a-af1a7b2db4ad",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Code in JavaScript').item.json.id }}",
+        "labelIds": [
+          "Label_3039486301852012534"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        -128
+      ],
+      "id": "7eeaf76e-2894-4665-ae64-18ee673ef9b9",
+      "name": "Sales Label",
+      "webhookId": "982b8aed-5ee3-4673-915f-b89a031ba5b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Code in JavaScript').item.json.id }}",
+        "labelIds": [
+          "Label_6429998540272541800"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        64
+      ],
+      "id": "da54af62-f04f-4ad8-b452-43e7d046fa07",
+      "name": "Finance",
+      "webhookId": "982b8aed-5ee3-4673-915f-b89a031ba5b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Code in JavaScript').item.json.id }}",
+        "labelIds": [
+          "Label_3357089933849164900"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        256
+      ],
+      "id": "e70a95ba-8cb6-49b7-ba07-befadc02dbb6",
+      "name": "Operations",
+      "webhookId": "982b8aed-5ee3-4673-915f-b89a031ba5b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Code in JavaScript').item.json.id }}",
+        "labelIds": [
+          "Label_7434392483699459639"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        448
+      ],
+      "id": "4effa8d6-54e2-4101-95eb-8167f43ba762",
+      "name": "HR",
+      "webhookId": "982b8aed-5ee3-4673-915f-b89a031ba5b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Code in JavaScript').item.json.id }}",
+        "labelIds": [
+          "Label_5903481041741788645"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        640
+      ],
+      "id": "69be26b1-a3ea-492a-bf56-7ff3fd3428e9",
+      "name": "Customer Service",
+      "webhookId": "982b8aed-5ee3-4673-915f-b89a031ba5b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Code in JavaScript').item.json.id }}",
+        "labelIds": [
+          "Label_6644092307471396763"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        832
+      ],
+      "id": "994e07af-4b3f-4142-9145-bdb08ddc108e",
+      "name": "Others",
+      "webhookId": "982b8aed-5ee3-4673-915f-b89a031ba5b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Sales Label",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Finance",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Operations",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HR",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Customer Service",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Others",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "647b0dcb-c854-4100-bcfa-3bfcc0f7e832",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a23e63b2e8c69ee14736801f5e43a28fe7dcf2048f5fa94ebba77260d19abe18"
+  },
+  "id": "34hGvYf3htx9hDu2",
+  "tags": []
+}

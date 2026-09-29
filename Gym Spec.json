@@ -1,0 +1,865 @@
+{
+  "name": "Gym Spec",
+  "nodes": [
+    {
+      "parameters": {
+        "formId": "b5Ybx1"
+      },
+      "type": "n8n-nodes-tallyforms.tallyTrigger",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7f4f715f-4708-43bf-9cce-d9512b3956a9",
+      "name": "Tally Trigger",
+      "webhookId": "af9229cc-1479-4e90-98bd-bdf746fc7ec8",
+      "credentials": {
+        "tallyApi": {
+          "id": "6hwV0G9GPZ52PGD4",
+          "name": "Tally account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appIEpXKT4BuXJE6I",
+          "mode": "list",
+          "cachedResultName": "Gym Spec",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblqzMwpM4IowxaVz",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I/tblqzMwpM4IowxaVz"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Full Name": "={{ $json.question_rEkrOM.value }}",
+            "Email Address": "={{ $json.question_4jpN7b.value }}",
+            "Phone Number": "={{ $json.question_jxk9oR.value }}",
+            "Subscription": "={{ $json.question_2rDxAp.value }}",
+            "Profile Picture": "={{ [{ url: $json.question_xZlNDG.value }] }}",
+            "Start Date": "={{ $now.format('MM-dd-yyyy') }}",
+            "End Date": "={{ $json.question_2rDxAp.value === '1 Month' ? $now.plus({ months: 1 }).format('MM-dd-yyyy') : $now.plus({ months: 3 }).format('MM-dd-yyyy') }}",
+            "Subscribtion Status": "Active"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Subscription",
+              "displayName": "Subscription",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Profile Picture",
+              "displayName": "Profile Picture",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "End Date",
+              "displayName": "End Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Subscribtion Status",
+              "displayName": "Subscribtion Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Active",
+                  "value": "Active"
+                },
+                {
+                  "name": "Inactive",
+                  "value": "Inactive"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "51f659e0-e7cc-4802-b211-fa1910703bd8",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "36a37591-2428-4848-841a-ec9c168e4d8a",
+              "name": "fields['Full Name']",
+              "value": "={{ $json.fields['Full Name'].split(' ')[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "376df714-2551-47ea-9040-4aad89d7b5b3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        0
+      ],
+      "id": "d8afeb6c-c64b-4dd3-8326-4015e6d5d3c3",
+      "name": "Wait",
+      "webhookId": "b2962358-1ca4-4c52-aa49-2a27dbc05adc"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Tally Trigger').item.json.question_4jpN7b.value }}",
+        "subject": "Welcome to Gym Spec ",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin:0;padding:0;background-color:#111111;font-family:Arial,sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#111111;padding:32px 16px;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"560\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-radius:12px;overflow:hidden;\">\n\n          <!-- Header -->\n          <tr>\n            <td style=\"background-color:#FF4500;padding:36px 32px 28px;\">\n              <p style=\"margin:0 0 12px;font-size:11px;font-weight:bold;letter-spacing:3px;color:#ffcfb8;\">MEMBERSHIP CONFIRMED</p>\n              <p style=\"margin:0;font-size:32px;font-weight:900;color:#ffffff;line-height:1.1;\">YOU'RE IN.<br>LET'S GET TO WORK.</p>\n              <div style=\"margin-top:16px;width:48px;height:4px;background:#ffffff;border-radius:2px;\"></div>\n            </td>\n          </tr>\n\n          <!-- Gradient stripe -->\n          <tr>\n            <td style=\"background:linear-gradient(90deg,#FF4500,#FF8C00,#FFD700);height:6px;font-size:0;line-height:0;\">&nbsp;</td>\n          </tr>\n\n          <!-- Body -->\n          <tr>\n            <td style=\"background-color:#1a1a1a;padding:32px;\">\n\n              <p style=\"margin:0 0 6px;font-size:16px;color:#ffffff;font-weight:bold;\">Hey {{ $json.fields['Full Name'] }},</p>\n              <p style=\"margin:0 0 28px;font-size:14px;color:#aaaaaa;line-height:1.8;\">Your membership is locked in and ready to go. No excuses — the gym is waiting for you. Here's everything you need to know.</p>\n\n              <!-- Stats row -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td width=\"33%\" style=\"padding-right:6px;\">\n                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FF4500;\">\n                      <tr>\n                        <td style=\"padding:16px;\">\n                          <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">PLAN</p>\n                          <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Tally Trigger').item.json.question_2rDxAp.value }}</p>\n                        </td>\n                      </tr>\n                    </table>\n                  </td>\n                  <td width=\"33%\" style=\"padding-right:6px;\">\n                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FF8C00;\">\n                      <tr>\n                        <td style=\"padding:16px;\">\n                          <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">STARTS</p>\n                          <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Create a record').item.json.fields['Start Date'] }}</p>\n                        </td>\n                      </tr>\n                    </table>\n                  </td>\n                  <td width=\"33%\">\n                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FFD700;\">\n                      <tr>\n                        <td style=\"padding:16px;\">\n                          <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">EXPIRES</p>\n                          <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Create a record').item.json.fields['End Date'] }}</p>\n                        </td>\n                      </tr>\n                    </table>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Divider -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr><td style=\"border-top:1px solid #2e2e2e;font-size:0;\">&nbsp;</td></tr>\n              </table>\n\n              <!-- What's next -->\n               <p style=\"margin:0 0 16px;font-size:11px;font-weight:bold;letter-spacing:2px;color:#FF4500;\">WHAT'S NEXT</p>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:14px;\">\n                <tr>\n                  <td width=\"36\" valign=\"top\">\n                    <div style=\"width:28px;height:28px;background:#FF4500;border-radius:50%;text-align:center;line-height:28px;font-size:12px;font-weight:bold;color:#ffffff;\">1</div>\n                  </td>\n                  <td style=\"padding-left:8px;font-size:14px;color:#cccccc;line-height:1.6;\">Show your membership confirmation at the front desk on your first visit.</td>\n                </tr>\n              </table>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:14px;\">\n                <tr>\n                  <td width=\"36\" valign=\"top\">\n                    <div style=\"width:28px;height:28px;background:#FF8C00;border-radius:50%;text-align:center;line-height:28px;font-size:12px;font-weight:bold;color:#ffffff;\">2</div>\n                  </td>\n                  <td style=\"padding-left:8px;font-size:14px;color:#cccccc;line-height:1.6;\">Pick your training days and stick to the plan.</td>\n                </tr>\n              </table>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td width=\"36\" valign=\"top\">\n                    <div style=\"width:28px;height:28px;background:#FFD700;border-radius:50%;text-align:center;line-height:28px;font-size:12px;font-weight:bold;color:#111111;\">3</div>\n                  </td>\n                  <td style=\"padding-left:8px;font-size:14px;color:#cccccc;line-height:1.6;\">Push hard. Results come to those who show up.</td>\n                </tr>\n              </table>\n\n              <!-- CTA -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td align=\"center\">\n                    <a href=\"#\" style=\"display:inline-block;background-color:#FF4500;color:#ffffff;font-size:14px;font-weight:900;padding:14px 36px;border-radius:6px;text-decoration:none;letter-spacing:1px;\">START TRAINING NOW</a>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Footer -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                <tr>\n                  <td style=\"border-top:1px solid #2e2e2e;padding-top:20px;text-align:center;\">\n                    <p style=\"margin:0;font-size:12px;color:#555555;line-height:1.7;\">Questions? Reply to this email anytime.<br>© 2026 Gym Spec. All rights reserved.</p>\n                  </td>\n                </tr>\n              </table>\n\n            </td>\n          </tr>\n\n        </table>\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        0
+      ],
+      "id": "e7104101-6c11-410a-8e16-9a4e7cb9e7fc",
+      "name": "Send a message",
+      "webhookId": "914f0d92-5dd6-4568-92a4-c6b9910be036",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        224
+      ],
+      "id": "281092a3-a42f-4771-a834-182ba3c8f690",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appIEpXKT4BuXJE6I",
+          "mode": "list",
+          "cachedResultName": "Gym Spec",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblqzMwpM4IowxaVz",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I/tblqzMwpM4IowxaVz"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        224
+      ],
+      "id": "58d526cc-a1cb-42dc-8118-2972c04d5054",
+      "name": "Search records",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "accee01e-c3d8-4b43-bf27-7a739a55b225",
+              "leftValue": "={{ $json.fields['End Date'] }}",
+              "rightValue": "={{ $now.plus(3, 'days').format('yyyy-MM-dd') }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        224
+      ],
+      "id": "f9fcc874-9a15-4ff1-ab9c-9911401bd3ba",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7e047440-8ec9-42c9-af9c-fbbd0d2fa081",
+              "name": "fields['Full Name']",
+              "value": "={{ $json.fields['Full Name'].split(' ')[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        224
+      ],
+      "id": "a49c29be-13c1-4272-9953-3e66c9a83ad4",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "formId": "jakBx1"
+      },
+      "type": "n8n-nodes-tallyforms.tallyTrigger",
+      "typeVersion": 2,
+      "position": [
+        0,
+        448
+      ],
+      "id": "bd8c6ba0-4b3c-4cb5-ba09-7234fe6d791f",
+      "name": "Tally Trigger1",
+      "webhookId": "ab2f07e9-befb-4a51-a04a-14958f32ba43",
+      "credentials": {
+        "tallyApi": {
+          "id": "6hwV0G9GPZ52PGD4",
+          "name": "Tally account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appIEpXKT4BuXJE6I",
+          "mode": "list",
+          "cachedResultName": "Gym Spec",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblqzMwpM4IowxaVz",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I/tblqzMwpM4IowxaVz"
+        },
+        "filterByFormula": "={Email Address} = \"{{ $json.question_N0OXrB.value }}\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        448
+      ],
+      "id": "1781c3f7-d782-4954-890c-f61653caefae",
+      "name": "Search records1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e25a7566-258b-4a42-b5d4-39a4328df628",
+              "name": "fields['Start Date']",
+              "value": "={{ $now.format('MM-dd-yyyy') }}",
+              "type": "string"
+            },
+            {
+              "id": "5e81313f-7b74-4114-bc10-a0a01a3ddb68",
+              "name": "fields['End Date']",
+              "value": "={{ $('Search records1').item.json.fields.Subscription === '1 Month' \n  ? $now.plus({ months: 1 }).format('MM-dd-yyyy') \n  : $now.plus({ months: 3 }).format('MM-dd-yyyy') }}",
+              "type": "string"
+            },
+            {
+              "id": "3a632e73-91a8-4abb-9835-3aeab0482d03",
+              "name": "fields['Full Name']",
+              "value": "={{ $json.fields['Full Name'].split(' ')[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        448
+      ],
+      "id": "8e273566-6117-4a85-a631-8f6148cd66b4",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appIEpXKT4BuXJE6I",
+          "mode": "list",
+          "cachedResultName": "Gym Spec",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblqzMwpM4IowxaVz",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appIEpXKT4BuXJE6I/tblqzMwpM4IowxaVz"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Search records1').item.json.id }}",
+            "Subscription": "={{ $('Tally Trigger1').item.json.question_qPNGLY.value }}",
+            "Start Date": "={{ $json.fields['Start Date'] }}",
+            "End Date": "={{ $json.fields['End Date'] }}",
+            "Subscribtion Status": "Active"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email Address",
+              "displayName": "Email Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Subscription",
+              "displayName": "Subscription",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Profile Picture",
+              "displayName": "Profile Picture",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "End Date",
+              "displayName": "End Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Subscribtion Status",
+              "displayName": "Subscribtion Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Active",
+                  "value": "Active"
+                },
+                {
+                  "name": "Inactive",
+                  "value": "Inactive"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Reminder Sent",
+              "displayName": "Reminder Sent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        448
+      ],
+      "id": "aa030c67-6dbd-4106-a4e3-a79776c81994",
+      "name": "Update record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields['Email Address'] }}",
+        "subject": "Your membership has been renewed ✅",
+        "message": "=<!DOCTYPE html> <html> <head>   <meta charset=\"UTF-8\">   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> </head> <body style=\"margin:0;padding:0;background-color:#111111;font-family:Arial,sans-serif;\">    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#111111;padding:32px 16px;\">     <tr>       <td align=\"center\">         <table width=\"560\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-radius:12px;overflow:hidden;\">            <!-- Header -->           <tr>             <td style=\"background-color:#FF4500;padding:36px 32px 28px;\">               <p style=\"margin:0 0 12px;font-size:11px;font-weight:bold;letter-spacing:3px;color:#ffcfb8;\">MEMBERSHIP RENEWED</p>               <p style=\"margin:0;font-size:32px;font-weight:900;color:#ffffff;line-height:1.1;\">YOU'RE BACK.<br>DON'T STOP NOW.</p>               <div style=\"margin-top:16px;width:48px;height:4px;background:#ffffff;border-radius:2px;\"></div>             </td>           </tr>            <!-- Gradient stripe -->           <tr>             <td style=\"background:linear-gradient(90deg,#FF4500,#FF8C00,#FFD700);height:6px;font-size:0;line-height:0;\">&nbsp;</td>           </tr>            <!-- Body -->           <tr>             <td style=\"background-color:#1a1a1a;padding:32px;\">                <p style=\"margin:0 0 6px;font-size:16px;color:#ffffff;font-weight:bold;\">Hey {{ $('Edit Fields2').item.json.fields['Full Name'] }},</p>               <p style=\"margin:0 0 28px;font-size:14px;color:#aaaaaa;line-height:1.8;\">Your subscription has been renewed successfully. You're all set to keep pushing. Here's your updated membership info.</p>                <!-- Stats row -->               <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">                 <tr>                   <td width=\"33%\" style=\"padding-right:6px;\">                     <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FF4500;\">                       <tr>                         <td style=\"padding:16px;\">                           <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">PLAN</p>                           <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $json.fields.Subscription }}</p>                         </td>                       </tr>                     </table>                   </td>                   <td width=\"33%\" style=\"padding-right:6px;\">                     <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FF8C00;\">                       <tr>                         <td style=\"padding:16px;\">                           <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">RENEWED</p>                           <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $now.format('MM-dd-yyyy') }}</p>                         </td>                       </tr>                     </table>                   </td>                   <td width=\"33%\">                     <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FFD700;\">                       <tr>                         <td style=\"padding:16px;\">                           <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">NEW EXPIRY</p>                           <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Edit Fields2').item.json.fields['End Date'] }}</p>                         </td>                       </tr>                     </table>                   </td>                 </tr>               </table>                <!-- Divider -->               <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">                 <tr><td style=\"border-top:1px solid #2e2e2e;font-size:0;\">&nbsp;</td></tr>               </table>                <!-- Motivation block -->               <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">                 <tr>                   <td style=\"background-color:#222222;border-radius:8px;border-left:4px solid #FF4500;padding:20px 24px;\">                     <p style=\"margin:0 0 8px;font-size:11px;font-weight:bold;letter-spacing:2px;color:#FF4500;\">KEEP THE MOMENTUM</p>                     <p style=\"margin:0;font-size:14px;color:#cccccc;line-height:1.8;\">Consistency beats intensity every time. You showed up again — that's what separates those who talk from those who transform. The gym is ready when you are.</p>                   </td>                 </tr>               </table>                <!-- What's updated -->               <p style=\"margin:0 0 16px;font-size:11px;font-weight:bold;letter-spacing:2px;color:#FF4500;\">WHAT'S UPDATED</p>                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:14px;\">                 <tr>                   <td width=\"36\" valign=\"top\">                     <div style=\"width:28px;height:28px;background:#FF4500;border-radius:50%;text-align:center;line-height:28px;font-size:12px;font-weight:bold;color:#ffffff;\">&#10003;</div>                   </td>                   <td style=\"padding-left:8px;font-size:14px;color:#cccccc;line-height:1.6;\">Membership status set to <strong style=\"color:#ffffff;\">Active</strong></td>                 </tr>               </table>                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:14px;\">                 <tr>                   <td width=\"36\" valign=\"top\">                     <div style=\"width:28px;height:28px;background:#FF8C00;border-radius:50%;text-align:center;line-height:28px;font-size:12px;font-weight:bold;color:#ffffff;\">&#10003;</div>                   </td>                   <td style=\"padding-left:8px;font-size:14px;color:#cccccc;line-height:1.6;\">New expiry date recorded in our system</td>                 </tr>               </table>                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">                 <tr>                   <td width=\"36\" valign=\"top\">                     <div style=\"width:28px;height:28px;background:#FFD700;border-radius:50%;text-align:center;line-height:28px;font-size:12px;font-weight:bold;color:#111111;\">&#10003;</div>                   </td>                   <td style=\"padding-left:8px;font-size:14px;color:#cccccc;line-height:1.6;\">You'll get a reminder before your next expiry</td>                 </tr>               </table>                <!-- CTA -->               <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">                 <tr>                   <td align=\"center\">                     <a href=\"#\" style=\"display:inline-block;background-color:#FF4500;color:#ffffff;font-size:14px;font-weight:900;padding:14px 36px;border-radius:6px;text-decoration:none;letter-spacing:1px;\">LET'S GET TO WORK</a>                   </td>                 </tr>               </table>                <!-- Footer -->               <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">                 <tr>                   <td style=\"border-top:1px solid #2e2e2e;padding-top:20px;text-align:center;\">                     <p style=\"margin:0;font-size:12px;color:#555555;line-height:1.7;\">Questions? Reply to this email anytime.<br>© 2026 Gym Spec. All rights reserved.</p>                   </td>                 </tr>               </table>              </td>           </tr>          </table>       </td>     </tr>   </table>  </body> </html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        448
+      ],
+      "id": "13240a15-528a-4209-97b7-5619ae38ce4a",
+      "name": "Send a message3",
+      "webhookId": "22079e5c-655b-4e5e-9e89-7a9e4bdc8752",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('If').item.json.fields['Email Address'] }}",
+        "subject": "Your Gym Subscription is About to Expire",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin:0;padding:0;background-color:#111111;font-family:Arial,sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#111111;padding:32px 16px;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"560\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-radius:12px;overflow:hidden;\">\n\n          <!-- Header -->\n          <tr>\n            <td style=\"background-color:#FF4500;padding:36px 32px 28px;\">\n              <p style=\"margin:0 0 12px;font-size:11px;font-weight:bold;letter-spacing:3px;color:#ffcfb8;\">MEMBERSHIP EXPIRY NOTICE</p>\n              <p style=\"margin:0;font-size:30px;font-weight:900;color:#ffffff;line-height:1.1;\">YOUR TIME IS<br>ALMOST UP.</p>\n              <div style=\"margin-top:16px;width:48px;height:4px;background:#ffffff;border-radius:2px;\"></div>\n            </td>\n          </tr>\n\n          <!-- Gradient stripe -->\n          <tr>\n            <td style=\"background:linear-gradient(90deg,#FF4500,#FF8C00,#FFD700);height:6px;font-size:0;line-height:0;\">&nbsp;</td>\n          </tr>\n\n          <!-- Body -->\n          <tr>\n            <td style=\"background-color:#1a1a1a;padding:32px;\">\n\n              <p style=\"margin:0 0 6px;font-size:16px;color:#ffffff;font-weight:bold;\">Hey {{ $json.fields['Full Name'] }},</p>\n              <p style=\"margin:0 0 28px;font-size:14px;color:#aaaaaa;line-height:1.8;\">Your gym membership is expiring soon. Don't lose your streak — renew now and keep the momentum going.</p>\n\n              <!-- Expiry cards -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td width=\"50%\" style=\"padding-right:6px;\">\n                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FF8C00;\">\n                      <tr>\n                        <td style=\"padding:16px;\">\n                          <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">CURRENT PLAN</p>\n                          <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Search records').item.json.fields.Subscription }}</p>\n                        </td>\n                      </tr>\n                    </table>\n                  </td>\n                  <td width=\"50%\">\n                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;border-left:3px solid #FFD700;\">\n                      <tr>\n                        <td style=\"padding:16px;\">\n                          <p style=\"margin:0 0 6px;font-size:11px;color:#888888;letter-spacing:1px;\">EXPIRES ON</p>\n                          <p style=\"margin:0;font-size:15px;font-weight:bold;color:#FFD700;\">{{ $('Search records').item.json.fields['End Date'] }}</p>\n                        </td>\n                      </tr>\n                    </table>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Urgency block -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td style=\"background-color:#2a1a00;border-radius:8px;border-left:4px solid #FF8C00;padding:20px 24px;\">\n                    <p style=\"margin:0 0 6px;font-size:11px;font-weight:bold;letter-spacing:2px;color:#FF8C00;\">&#9888; DON'T LOSE YOUR PROGRESS</p>\n                    <p style=\"margin:0;font-size:14px;color:#cccccc;line-height:1.8;\">Once your membership expires, gym access is paused. Renew before the deadline to avoid any interruption to your training.</p>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- CTA -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td align=\"center\">\n                    <a href=\"https://tally.so/r/jakBx1\" style=\"display:inline-block;background-color:#FF4500;color:#ffffff;font-size:14px;font-weight:900;padding:14px 36px;border-radius:6px;text-decoration:none;letter-spacing:1px;\">RENEW MY MEMBERSHIP</a>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Footer -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                <tr>\n                  <td style=\"border-top:1px solid #2e2e2e;padding-top:20px;text-align:center;\">\n                    <p style=\"margin:0;font-size:12px;color:#555555;line-height:1.7;\">Questions? Reply to this email anytime.<br>© 2026 Gym Spec. All rights reserved.</p>\n                  </td>\n                </tr>\n              </table>\n\n            </td>\n          </tr>\n\n        </table>\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        224
+      ],
+      "id": "e3dff8f4-01ef-40d1-a059-fed7350de1e5",
+      "name": "Client",
+      "webhookId": "6f651637-e19b-4180-9a63-d6fe00fbae10",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "shollypaiauto@gmail.com",
+        "subject": "Subscription Alert",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin:0;padding:0;background-color:#111111;font-family:Arial,sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#111111;padding:32px 16px;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"560\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-radius:12px;overflow:hidden;\">\n\n          <!-- Header -->\n          <tr>\n            <td style=\"background-color:#222222;padding:36px 32px 28px;border-top:4px solid #FFD700;\">\n              <p style=\"margin:0 0 12px;font-size:11px;font-weight:bold;letter-spacing:3px;color:#FFD700;\">INTERNAL ALERT</p>\n              <p style=\"margin:0;font-size:28px;font-weight:900;color:#ffffff;line-height:1.1;\">MEMBER EXPIRY<br>FOLLOW-UP NEEDED</p>\n              <div style=\"margin-top:16px;width:48px;height:4px;background:#FFD700;border-radius:2px;\"></div>\n            </td>\n          </tr>\n\n          <!-- Gradient stripe -->\n          <tr>\n            <td style=\"background:linear-gradient(90deg,#FFD700,#FF8C00,#FF4500);height:6px;font-size:0;line-height:0;\">&nbsp;</td>\n          </tr>\n\n          <!-- Body -->\n          <tr>\n            <td style=\"background-color:#1a1a1a;padding:32px;\">\n\n              <p style=\"margin:0 0 24px;font-size:14px;color:#aaaaaa;line-height:1.8;\">The following member's subscription is expiring soon. Please follow up and encourage renewal.</p>\n\n              <!-- Member details table -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#222222;border-radius:8px;margin-bottom:28px;overflow:hidden;\">\n                <tr>\n                  <td style=\"padding:16px 20px;border-bottom:1px solid #2e2e2e;\">\n                    <p style=\"margin:0 0 4px;font-size:11px;color:#888888;letter-spacing:1px;\">MEMBER NAME</p>\n                    <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Search records').item.json.fields['Full Name'] }}</p>\n                  </td>\n                </tr>\n                <tr>\n                  <td style=\"padding:16px 20px;border-bottom:1px solid #2e2e2e;\">\n                    <p style=\"margin:0 0 4px;font-size:11px;color:#888888;letter-spacing:1px;\">EMAIL</p>\n                    <p style=\"margin:0;font-size:15px;font-weight:bold;color:#FF4500;\">{{ $('Search records').item.json.fields['Email Address'] }}</p>\n                  </td>\n                </tr>\n                <tr>\n                  <td style=\"padding:16px 20px;border-bottom:1px solid #2e2e2e;\">\n                    <p style=\"margin:0 0 4px;font-size:11px;color:#888888;letter-spacing:1px;\">PHONE</p>\n                    <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Search records').item.json.fields['Phone Number'] }}</p>\n                  </td>\n                </tr>\n                <tr>\n                  <td style=\"padding:16px 20px;border-bottom:1px solid #2e2e2e;\">\n                    <p style=\"margin:0 0 4px;font-size:11px;color:#888888;letter-spacing:1px;\">PLAN</p>\n                    <p style=\"margin:0;font-size:15px;font-weight:bold;color:#ffffff;\">{{ $('Search records').item.json.fields.Subscription }}</p>\n                  </td>\n                </tr>\n                <tr>\n                  <td style=\"padding:16px 20px;\">\n                    <p style=\"margin:0 0 4px;font-size:11px;color:#888888;letter-spacing:1px;\">EXPIRY DATE</p>\n                    <p style=\"margin:0;font-size:15px;font-weight:bold;color:#FFD700;\">{{ $('Search records').item.json.fields['End Date'] }}</p>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Action required block -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td style=\"background-color:#1f1a00;border-radius:8px;border-left:4px solid #FFD700;padding:20px 24px;\">\n                    <p style=\"margin:0 0 6px;font-size:11px;font-weight:bold;letter-spacing:2px;color:#FFD700;\">ACTION REQUIRED</p>\n                    <p style=\"margin:0;font-size:14px;color:#cccccc;line-height:1.8;\">Reach out to this member via phone or email. Confirm if they received the renewal reminder and assist them with the renewal process if needed.</p>\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Footer -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n                <tr>\n                  <td style=\"border-top:1px solid #2e2e2e;padding-top:20px;text-align:center;\">\n                    <p style=\"margin:0;font-size:12px;color:#555555;line-height:1.7;\">This is an automated internal alert from your n8n workflow.<br>© 2026 Gym Spec. All rights reserved.</p>\n                  </td>\n                </tr>\n              </table>\n\n            </td>\n          </tr>\n\n        </table>\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        224
+      ],
+      "id": "54e99629-3554-4a24-9591-0dcad4f0dc20",
+      "name": "Team",
+      "webhookId": "73f19897-7b84-4ad6-836e-5a75ec38dca9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "FbUmquthuQtyqcUl",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        448
+      ],
+      "id": "5ad37d38-29c0-4423-bbee-556c8a767e65",
+      "name": "Wait1",
+      "webhookId": "0adef5a2-4127-44a1-8e9c-9f55a5da1e54"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Tally Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Search records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tally Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Search records1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Client": {
+      "main": [
+        [
+          {
+            "node": "Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a53c8607-1a0a-49fb-a5f5-12022ad1a9fa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a23e63b2e8c69ee14736801f5e43a28fe7dcf2048f5fa94ebba77260d19abe18"
+  },
+  "id": "HcAJtiIAmGvTJMYX",
+  "tags": []
+}

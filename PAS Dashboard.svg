@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" width="100%" height="100%">
+  <!-- Clean SaaS Dashboard Background -->
+  <rect width="600" height="380" fill="#F8FAFC" />
+
+  <!-- Top App Navbar -->
+  <rect width="600" height="48" fill="#0F172A" />
+  <circle cx="28" cy="24" r="10" fill="#10B981" />
+  <text x="46" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">PASSION</text>
+  <text x="110" y="29" font-family="-apple-system, sans-serif" font-size="12" fill="#94A3B8">Accounting Software</text>
+  <rect x="470" y="14" width="112" height="22" rx="4" fill="#1E293B" />
+  <text x="480" y="29" font-family="-apple-system, sans-serif" font-size="10.5" fill="#38BDF8">● Live Multi-Outlet</text>
+
+  <!-- Sidebar -->
+  <rect y="48" width="130" height="332" fill="#FFFFFF" stroke="#E2E8F0" />
+  <g transform="translate(14, 66)">
+    <rect width="102" height="26" rx="5" fill="#F1F5F9" />
+    <text x="10" y="17" font-family="-apple-system, sans-serif" font-size="11.5" font-weight="600" fill="#0F172A">📊 Overview</text>
+    <text x="10" y="47" font-family="-apple-system, sans-serif" font-size="11.5" fill="#64748B">🛒 POS / Sales</text>
+    <text x="10" y="74" font-family="-apple-system, sans-serif" font-size="11.5" fill="#64748B">📦 Inventory</text>
+    <text x="10" y="101" font-family="-apple-system, sans-serif" font-size="11.5" fill="#64748B">📑 Invoices</text>
+    <text x="10" y="128" font-family="-apple-system, sans-serif" font-size="11.5" fill="#64748B">🏨 Outlets</text>
+    <text x="10" y="155" font-family="-apple-system, sans-serif" font-size="11.5" fill="#64748B">📈 Reports</text>
+  </g>
+
+  <!-- Main Content Area -->
+  <g transform="translate(146, 62)">
+    <text x="0" y="16" font-family="-apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">Enterprise Business Summary</text>
+    <text x="0" y="32" font-family="-apple-system, sans-serif" font-size="11" fill="#64748B">Supporting Pharmacies · Supermarkets · Wholesale &amp; Retail · Farms · Hotels</text>
+
+    <!-- KPI Metric Cards -->
+    <g transform="translate(0, 44)">
+      <!-- Card 1: Today's Revenue -->
+      <rect width="136" height="66" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+      <text x="12" y="18" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#64748B" text-transform="uppercase">Today's Revenue</text>
+      <text x="12" y="40" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="#0F172A">₦4,285,500</text>
+      <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="9.5" fill="#10B981">↑ +14.2% vs yesterday</text>
+
+      <!-- Card 2: Inventory Tracked -->
+      <g transform="translate(146, 0)">
+        <rect width="136" height="66" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+        <text x="12" y="18" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#64748B" text-transform="uppercase">Stock Items</text>
+        <text x="12" y="40" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="#0F172A">2,410 Units</text>
+        <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="9.5" fill="#64748B">12 Reorder alerts</text>
+      </g>
+
+      <!-- Card 3: Active Outlets -->
+      <g transform="translate(292, 0)">
+        <rect width="144" height="66" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+        <text x="12" y="18" font-family="-apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#64748B" text-transform="uppercase">Active Branches</text>
+        <text x="12" y="40" font-family="-apple-system, sans-serif" font-size="15" font-weight="800" fill="#0F172A">8 Locations</text>
+        <text x="12" y="55" font-family="-apple-system, sans-serif" font-size="9.5" fill="#10B981">● All online &amp; synced</text>
+      </g>
+    </g>
+
+    <!-- Recent Sales Table Mockup -->
+    <g transform="translate(0, 126)">
+      <rect width="436" height="176" rx="8" fill="#FFFFFF" stroke="#E2E8F0" />
+      <rect width="436" height="28" rx="8" fill="#F8FAFC" />
+      <text x="14" y="18" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#475467">Recent Business Transactions</text>
+      
+      <!-- Table Rows -->
+      <g transform="translate(14, 46)">
+        <text x="0" y="0" font-family="-apple-system, sans-serif" font-size="10.5" fill="#0F172A">Medix Pharmacy (Branch 1)</text>
+        <text x="210" y="0" font-family="-apple-system, sans-serif" font-size="10" fill="#64748B">Prescription &amp; OTC POS</text>
+        <text x="360" y="0" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#0F172A">₦48,500</text>
+      </g>
+      <line x1="14" y1="58" x2="422" y2="58" stroke="#F1F5F9" />
+
+      <g transform="translate(14, 76)">
+        <text x="0" y="0" font-family="-apple-system, sans-serif" font-size="10.5" fill="#0F172A">Grand Supermarket &amp; Retail</text>
+        <text x="210" y="0" font-family="-apple-system, sans-serif" font-size="10" fill="#64748B">Barcode Checkout #1042</text>
+        <text x="360" y="0" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#0F172A">₦124,000</text>
+      </g>
+      <line x1="14" y1="88" x2="422" y2="88" stroke="#F1F5F9" />
+
+      <g transform="translate(14, 106)">
+        <text x="0" y="0" font-family="-apple-system, sans-serif" font-size="10.5" fill="#0F172A">Crown View Hotel &amp; Suites</text>
+        <text x="210" y="0" font-family="-apple-system, sans-serif" font-size="10" fill="#64748B">Room Billing &amp; Resto POS</text>
+        <text x="360" y="0" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#0F172A">₦85,000</text>
+      </g>
+      <line x1="14" y1="118" x2="422" y2="118" stroke="#F1F5F9" />
+
+      <g transform="translate(14, 136)">
+        <text x="0" y="0" font-family="-apple-system, sans-serif" font-size="10.5" fill="#0F172A">AgroGreen Wholesale Farms</text>
+        <text x="210" y="0" font-family="-apple-system, sans-serif" font-size="10" fill="#64748B">Bulk Distribution Invoice</text>
+        <text x="360" y="0" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#0F172A">₦340,000</text>
+      </g>
+    </g>
+  </g>
+</svg>

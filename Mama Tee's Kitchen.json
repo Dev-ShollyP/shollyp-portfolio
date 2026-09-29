@@ -1,0 +1,891 @@
+{
+  "name": "Mama Tee's Kitchen",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.message.toolCallList[0].function.name }}",
+                    "rightValue": "create_order",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e4e4cff1-78ea-4e87-aec3-ef41dc1f6b8a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9db6bd00-2dcd-49d9-a404-7d1f7b3f8c9a",
+                    "leftValue": "={{ $json.body.message.toolCallList[0].function.name }}",
+                    "rightValue": "create_reservation",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "2833e4ef-cd68-478f-8adb-19323f4e07ef",
+                    "leftValue": "={{ $json.body.message.toolCallList[0].function.name }}",
+                    "rightValue": "log_catering_request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "08a3c478-a5b8-4a26-bbe1-648e77618d7d",
+                    "leftValue": "={{ $json.body.message.toolCallList[0].function.name }}",
+                    "rightValue": "log_callback_request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "1b8fb573-1217-4aef-88d5-9e27414341a9",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mama-tee-vapi",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        32
+      ],
+      "id": "f3e50a52-d6ea-4d75-9770-355171131e4a",
+      "name": "Vapi",
+      "webhookId": "b2a93fc1-1cab-4e1f-89dc-f25e28a04294"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appMDiP322NXbKtaF",
+          "mode": "list",
+          "cachedResultName": "Mama Tee's Kitchen",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblMP01Wd8Q1aQd2O",
+          "mode": "list",
+          "cachedResultName": "Order",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF/tblMP01Wd8Q1aQd2O"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Customer Name": "={{ $json.customer_name }}",
+            "Phone Number": "={{ $json.phone_number }}",
+            "Order Items": "={{ $json.order_items }}",
+            "Order Type": "={{ $json.order_type }}",
+            "Delivery Address": "={{ $json.delivery_address }}",
+            "Customizations": "={{ $json.customizations }}",
+            "Total Amount": "={{ $json.total_amount }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Customer Name",
+              "displayName": "Customer Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Order Items",
+              "displayName": "Order Items",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Order Type",
+              "displayName": "Order Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Delivery Address",
+              "displayName": "Delivery Address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Customizations",
+              "displayName": "Customizations",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Total Amount",
+              "displayName": "Total Amount",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        -256
+      ],
+      "id": "2edad401-9836-442d-928c-4e33e5352dd9",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const fn = $input.first().json.body.message.toolCallList[0].function;\nconst args = fn['arguments'];\n\nreturn [{\n  json: {\n    customer_name: args.customer_name,\n    phone_number: args.phone_number,\n    order_items: args.order_items,\n    order_type: args.order_type,\n    delivery_address: args.delivery_address,\n    customizations: args.customizations,\n    total_amount: args.total_amount\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        -256
+      ],
+      "id": "3e819422-7473-4a59-ae02-6ea53ac18b75",
+      "name": "create_order"
+    },
+    {
+      "parameters": {
+        "jsCode": "const fn = $input.first().json.body.message.toolCallList[0].function;\nconst args = fn['arguments'];\n\nreturn [{\n  json: {\n    customer_name: args.customer_name,\n    phone_number: args.phone_number,\n    event_type: args.event_type,\n    number_of_guests: args.number_of_guests,\n    event_date: args.event_date,\n    dietary_notes: args.dietary_notes,\n    special_requests: args.special_requests\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        128
+      ],
+      "id": "472c177c-c151-45dd-ba7b-abf91b8f5d92",
+      "name": "log_catering_request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const fn = $input.first().json.body.message.toolCallList[0].function;\nconst args = fn['arguments'];\n\nreturn [{\n  json: {\n    customer_name: args.customer_name,\n    phone_number: args.phone_number,\n    issue_summary: args.issue_summary\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        320
+      ],
+      "id": "da0060f6-39d7-499a-856b-07a9e1270cdb",
+      "name": "log_callback_request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const fn = $input.first().json.body.message.toolCallList[0].function;\nconst args = fn['arguments'];\n\nreturn [{\n  json: {\n    customer_name: args.customer_name,\n    phone_number: args.phone_number,\n    number_of_guests: args.number_of_guests,\n    reservation_date: args.reservation_date,\n    reservation_time: args.reservation_time,\n    special_notes: args.special_notes\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        -64
+      ],
+      "id": "bdfbc689-a8f9-45b1-a3cd-ee0069a812a7",
+      "name": "create_reservations"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appMDiP322NXbKtaF",
+          "mode": "list",
+          "cachedResultName": "Mama Tee's Kitchen",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblenBaEdbH2idtmm",
+          "mode": "list",
+          "cachedResultName": "Reservation",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF/tblenBaEdbH2idtmm"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Customer Name": "={{ $json.customer_name }}",
+            "Phone Number": "={{ $json.phone_number }}",
+            "Number of Guests": "={{ $json.number_of_guests }}",
+            "Reservation Date": "={{ $json.reservation_date }}",
+            "Reservation Time": "={{ $json.reservation_time }}",
+            "Special Notes": "={{ $json.special_notes }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Customer Name",
+              "displayName": "Customer Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Number of Guests",
+              "displayName": "Number of Guests",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Reservation Date",
+              "displayName": "Reservation Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Reservation Time",
+              "displayName": "Reservation Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Special Notes",
+              "displayName": "Special Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        -64
+      ],
+      "id": "2d2cff76-25c7-4f92-9081-f0cc847fcbd2",
+      "name": "Create a record1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appMDiP322NXbKtaF",
+          "mode": "list",
+          "cachedResultName": "Mama Tee's Kitchen",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblu7BIGiiTDhkzUd",
+          "mode": "list",
+          "cachedResultName": "Catering",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF/tblu7BIGiiTDhkzUd"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Customer Name": "={{ $json.customer_name }}",
+            "Phone Number": "={{ $json.phone_number }}",
+            "Event Type": "={{ $json.special_notes }}",
+            "Number of Guests": "={{ $json.number_of_guests }}",
+            "Event Date": "={{ $json.event_date }}",
+            "Dietary Notes": "={{ $json.dietary_notes }}",
+            "Special Requests": "={{ $json.special_requests }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Customer Name",
+              "displayName": "Customer Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Event Type",
+              "displayName": "Event Type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Number of Guests",
+              "displayName": "Number of Guests",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Event Date",
+              "displayName": "Event Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Dietary Notes",
+              "displayName": "Dietary Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Special Requests",
+              "displayName": "Special Requests",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        128
+      ],
+      "id": "4ec06d1f-a236-4454-aeee-40b00603ec30",
+      "name": "Create a record2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appMDiP322NXbKtaF",
+          "mode": "list",
+          "cachedResultName": "Mama Tee's Kitchen",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBGBavp8HyqfGIK",
+          "mode": "list",
+          "cachedResultName": "Callbacks",
+          "cachedResultUrl": "https://airtable.com/appMDiP322NXbKtaF/tblBGBavp8HyqfGIK"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Customer Name": "={{ $json.customer_name }}",
+            "Phone Number": "={{ $json.phone_number }}",
+            "Issue Summary": "={{ $json.issue_summary }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Customer Name",
+              "displayName": "Customer Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Issue Summary",
+              "displayName": "Issue Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        320
+      ],
+      "id": "8e699db8-6e7a-4e99-beda-ef4248f1a91f",
+      "name": "Create a record3",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ECol2gmEEmzB2ozW",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+14155238886",
+        "to": "=+2348083708357",
+        "toWhatsapp": true,
+        "message": "=🍛 New Order — Mama Tee's Kitchen\n\n👤 Customer: {{ $json.fields['Customer Name'] }}\n📞 Phone: {{ $('Create a record').item.json.fields['Phone Number'] }}\n🛒 Items: {{ $('Create a record').item.json.fields['Order Items'] }}\n🚗 Type: {{ $('Create a record').item.json.fields['Order Type'] }}\n📍 Address: {{ $('Create a record').item.json.fields['Delivery Address'] }}\n✏️ Customizations: {{ $('Create a record').item.json.fields.Customizations }}\n💰 Total: {{ $('Create a record').item.json.fields['Total Amount'] }}\n\nReceived via Kemi, your AI assistant",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        896,
+        -256
+      ],
+      "id": "19599625-3913-4d6e-81ac-3e9c9659d27c",
+      "name": "Order Message",
+      "credentials": {
+        "twilioApi": {
+          "id": "h9wENBzrRWrl9qIj",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+14155238886",
+        "to": "=+2348083708357",
+        "toWhatsapp": true,
+        "message": "=📅 New Reservation — Mama Tee's Kitchen\n\n👤 Customer: {{ $('create_reservations').item.json.customer_name }}\n📞 Phone: {{ $('create_reservations').item.json.phone_number }}\n👥 Guests: {{ $('create_reservations').item.json.number_of_guests }}\n📆 Date: {{ $('create_reservations').item.json.reservation_date }}\n🕐 Time: {{ $('create_reservations').item.json.reservation_time }}\n📝 Notes: {{ $('create_reservations').item.json.special_notes }}\n\n💳 Remind customer: ₦5,000 deposit required\nReceived via Kemi, your AI assistant",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        896,
+        -64
+      ],
+      "id": "3c12930f-f786-4bbf-a1dc-8a5d84b019eb",
+      "name": "Reservation Message",
+      "credentials": {
+        "twilioApi": {
+          "id": "h9wENBzrRWrl9qIj",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+14155238886",
+        "to": "=+2348083708357",
+        "toWhatsapp": true,
+        "message": "=🍽️ New Catering Request — Mama Tee's Kitchen\n\n👤 Customer: {{ $('log_catering_request').item.json.customer_name }}\n📞 Phone: {{ $('log_catering_request').item.json.phone_number }}\n🎉 Event: {{ $('log_catering_request').item.json.event_type }}\n👥 Guests: {{ $('log_catering_request').item.json.number_of_guests }}\n📆 Date: {{ $('log_catering_request').item.json.event_date }}\n🥗 Dietary: {{ $('log_catering_request').item.json.dietary_notes }}\n📋 Requests: {{ $('log_catering_request').item.json.special_requests }}\n\n⚠️ Call back within 24 hours!\nReceived via Kemi, your AI assistant",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        896,
+        128
+      ],
+      "id": "6a461424-8965-4c2c-bf48-ddebdd8d4f17",
+      "name": "Catering Message",
+      "credentials": {
+        "twilioApi": {
+          "id": "h9wENBzrRWrl9qIj",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+14155238886",
+        "to": "=+2348083708357",
+        "toWhatsapp": true,
+        "message": "=📲 Callback Needed — Mama Tee's Kitchen\n\n👤 Customer: {{ $('log_callback_request').item.json.customer_name }}\n📞 Phone: {{ $('log_callback_request').item.json.phone_number }}\n❓ Issue: {{ $('log_callback_request').item.json.issue_summary }}\n\n 🚨 Please call this customer back ASAP!\nReceived via Kemi, your AI assistant",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        896,
+        320
+      ],
+      "id": "f42bfcfd-e94a-4c5b-89b2-b689c1d4778e",
+      "name": "Callack Message",
+      "credentials": {
+        "twilioApi": {
+          "id": "h9wENBzrRWrl9qIj",
+          "name": "Twilio account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Vapi": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "create_order",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "create_reservations",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "log_catering_request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "log_callback_request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_order": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "log_catering_request": {
+      "main": [
+        [
+          {
+            "node": "Create a record2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_reservations": {
+      "main": [
+        [
+          {
+            "node": "Create a record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "log_callback_request": {
+      "main": [
+        [
+          {
+            "node": "Create a record3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Order Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record1": {
+      "main": [
+        [
+          {
+            "node": "Reservation Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record2": {
+      "main": [
+        [
+          {
+            "node": "Catering Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record3": {
+      "main": [
+        [
+          {
+            "node": "Callack Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order Message": {
+      "main": [
+        []
+      ]
+    },
+    "Reservation Message": {
+      "main": [
+        []
+      ]
+    },
+    "Catering Message": {
+      "main": [
+        []
+      ]
+    },
+    "Callack Message": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "7e4232e8-f032-49e6-bbcd-d07620c70b8d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a23e63b2e8c69ee14736801f5e43a28fe7dcf2048f5fa94ebba77260d19abe18"
+  },
+  "id": "QmKpPB9LebKGr9AM",
+  "tags": []
+}
